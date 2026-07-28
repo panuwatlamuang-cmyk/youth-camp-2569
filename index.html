@@ -44,18 +44,28 @@
       padding:4px 10px 10px; text-align:center;
       margin-bottom:10px;
     }
+
+    .municipal-logo{
+      width:105px;
+      height:105px;
+      object-fit:contain;
+      display:block;
+      margin:0 auto 8px;
+    }
     h1,h2,p{margin:0}
     h1{font-size:1.35rem;font-weight:700}
     .project{font-size:1.2rem;font-weight:700;margin-top:4px}
-    .org,.date,.place{font-size:1.05rem;font-weight:700;margin-top:3px}
+    .org,.date{font-size:1.05rem;font-weight:700;margin-top:3px}.place{font-size:.9rem;font-weight:700;margin-top:3px}
     .section-title{
       margin:1.35em 0 6px; padding:0; font-size:1.08rem; font-weight:700;
       text-decoration:underline;
     }
-    .section-title.applicant,.section-title.parent{margin-top:2.35em}
+    .section-title.applicant{margin-top:2.35em}
     .section-title.parent{background:transparent;border:0}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:9px 12px}
-    .field{grid-column:span 12;display:flex;align-items:flex-end;gap:6px}
+    .applicant-grid,.parent-grid{row-gap:.6em}
+    .section-title.parent{margin-top:1em}
+    .note{margin-top:4.5em;display:flex;align-items:flex-end;gap:6px}
     .span-2{grid-column:span 2}.span-3{grid-column:span 3}.span-4{grid-column:span 4}
     .span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}
     .span-8{grid-column:span 8}.span-9{grid-column:span 9}
@@ -107,7 +117,7 @@
     .name-under-signature{grid-column:2;display:flex;align-items:center;justify-content:center;gap:3px}
     .printed-name-row .paren{font-size:1rem}
     .printed-name{width:100%!important;text-align:center;color:#111!important;border:0!important;border-bottom:1px solid #444!important;padding:1px 4px!important;background:transparent!important}
-    .note{margin-top:2.5em;background:#f2f3f5;padding:7px 10px;font-weight:600}
+    .note{background:#f2f3f5;padding:7px 10px;font-weight:600;font-size:.82rem;white-space:nowrap}
     .document-footer{margin-top:16px;padding-top:5px;border-top:1px solid #888;display:flex;justify-content:space-between;gap:12px;font-size:.86rem;color:#444}
     .required::after{content:" *";color:#c00}
     .status{display:none;margin:10px auto 0;max-width:210mm;padding:8px 12px;border-radius:8px;text-align:center}
@@ -125,9 +135,10 @@
       .toolbar,.no-print-info,.status,.sig-tabs,.sig-panel,.sig-actions,.sig-label,.sig-wrap .small-note{display:none!important}
       .page{width:170mm;height:257mm;min-height:257mm;margin:0;padding:0;box-shadow:none;display:flex;flex-direction:column;overflow:hidden;break-after:avoid-page;page-break-after:avoid}
       .header-box{padding:0 4px 4px;margin-bottom:3px;border:0;background:#fff}
-      h1{font-size:1.28rem}.project{font-size:1.12rem}.org,.date,.place{font-size:1rem;margin-top:1px}
+      .municipal-logo{width:88px;height:88px;margin:0 auto 4px}
+      h1{font-size:1.28rem}.project{font-size:1.12rem}.org,.date{font-size:1rem;margin-top:1px}.place{font-size:.82rem;margin-top:1px}
       .section-title{margin:7px 0 2px;padding:0;font-size:1.06rem;border:0;background:#fff!important;text-decoration:none}
-      .grid{gap:2px 8px}
+      .grid{column-gap:8px;row-gap:.6em}
       .field{display:flex;align-items:flex-end;gap:4px}
       .field label{display:block;white-space:nowrap;margin:0;font-weight:400}
       .field input,.field select,.field textarea{flex:1;min-width:0}
@@ -148,11 +159,11 @@
       .name-under-signature{font-size:1rem}
       .name-under-signature .printed-name{border-bottom:0!important;color:#111!important}
       .small-note{font-size:.82rem;margin-top:0}
-      .note{margin-top:44px;padding:4px 7px;background:#fff;border:1px solid #aaa}
+      .note{margin-top:4.5em;padding:4px 7px;background:#fff;border:1px solid #aaa;font-size:.76rem;white-space:nowrap}
       .document-footer{margin-top:auto;padding-top:4px;font-size:.78rem}
       .header-box,.sig-wrap,.section-title,.note{break-inside:avoid}
       .section-title{break-after:avoid}
-      .section-title.applicant,.section-title.parent{margin-top:22px}
+      .section-title.applicant{margin-top:22px}.section-title.parent{margin-top:1em}
     }
   </style>
 </head>
@@ -169,15 +180,15 @@
 
     <main class="page">
       <div class="header-box">
+        <img src="logo.jpg" alt="ตราเทศบาลตำบลพระลับ" class="municipal-logo">
         <h1>ใบสมัครเข้าร่วมโครงการ</h1>
-        <div class="project">ค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริ ประจำปีงบประมาณ ๒๕๖๙</div>
-        <div class="org">เทศบาลตำบลพระลับ อำเภอเมืองขอนแก่น จังหวัดขอนแก่น</div>
+        <div class="project">ค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริ<br>ประจำปีงบประมาณ ๒๕๖๙</div>
         <div class="date">วันที่ ๒๕ - ๒๖ สิงหาคม ๒๕๖๙</div>
         <div class="place">ณ สวนสัตว์ขอนแก่น ตำบลคำม่วง อำเภอเขาสวนกวาง จังหวัดขอนแก่น</div>
       </div>
 
       <div class="section-title applicant">ส่วนที่ ๑ ข้อมูลผู้สมัคร</div>
-      <div class="grid">
+      <div class="grid applicant-grid">
         <div class="field span-9"><label class="required">ชื่อ - นามสกุล</label><input required type="text" name="applicant_name" autocomplete="name"></div>
         <div class="field span-3"><label class="required">อายุ (ปี)</label><input required type="number" name="age" min="1" max="99"></div>
         <div class="field span-7"><label class="required">วันเดือนปีเกิด</label><input required type="date" name="birth_date"></div>
@@ -188,8 +199,8 @@
         <div class="field span-6"><label class="required">ตำบล/แขวง</label><input required type="text" name="subdistrict"></div>
         <div class="field span-6"><label class="required">อำเภอ/เขต</label><input required type="text" name="district"></div>
         <div class="field span-6"><label class="required">จังหวัด</label><input required type="text" name="province"></div>
-        <div class="field span-8"><label class="required">โรงเรียน</label><input required type="text" name="school"></div>
-        <div class="field span-4"><label class="required">กำลังศึกษาในระดับชั้น</label><input required type="text" name="class_level"></div>
+        <div class="field span-7"><label class="required">โรงเรียน</label><input required type="text" name="school"></div>
+        <div class="field span-5"><label class="required">กำลังศึกษาในระดับชั้น</label><input required type="text" name="class_level"></div>
       </div>
 
       <div class="sig-wrap" data-sig="applicant">
@@ -221,10 +232,11 @@
       </div>
 
       <div class="section-title parent">ส่วนที่ ๒ คำรับรองของผู้ปกครอง</div>
-      <div class="grid">
+      <div class="grid parent-grid">
         <div class="field"><label class="required">ข้าพเจ้า</label><input required type="text" name="parent_name"></div>
         <div class="field"><label class="required">เป็นผู้ปกครองของ</label><input required type="text" name="parent_of"></div>
       </div>
+      <br>
       <div class="choice-row" role="group" aria-label="คำอนุญาตของผู้ปกครอง">
         <label class="choice"><input required type="radio" name="permission" value="อนุญาต"> อนุญาต</label>
         <label class="choice"><input required type="radio" name="permission" value="ไม่อนุญาต"> ไม่อนุญาต</label>
