@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ใบสมัครเข้าร่วมโครงการค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริ 2569</title>
+  <style>
+    :root{
+      --ink:#111;--blue:#0645ad;--paper:#fff;--bg:#eef1f5;--danger:#b42318;
+    }
+    *{box-sizing:border-box}
+    html{font-size:22px}
+    body{
+      margin:0;background:var(--bg);color:var(--ink);
+      font-family:"TH Sarabun New","TH SarabunPSK","Sarabun",Tahoma,sans-serif;
+      line-height:1.35;
+    }
+    .toolbar{
+      position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;gap:8px;
+      justify-content:center;padding:10px;background:rgba(255,255,255,.96);
+      border-bottom:1px solid #ddd;
+    }
+    button{
+      font:inherit;border:1px solid #aab4c0;border-radius:8px;background:#fff;
+      padding:7px 14px;cursor:pointer;color:#111;
+    }
+    button.primary{background:#124da0;color:#fff;border-color:#124da0}
+    .page{
+      width:min(210mm,calc(100% - 20px));min-height:297mm;margin:18px auto;
+      background:var(--paper);padding:20mm;box-shadow:0 5px 25px rgba(0,0,0,.12);
+    }
+    .header-box{padding:4px 10px 10px;text-align:center;margin-bottom:10px}
+    .logo{width:90px;display:block;margin:0 auto 10px}
+    h1,h2,p{margin:0}
+    h1{font-size:1.35rem;font-weight:700}
+    .project{font-size:1.2rem;font-weight:700;margin-top:4px}
+    .org,.date,.place{font-size:1.05rem;font-weight:700;margin-top:3px}
+    .section-title{
+      margin:1.35em 0 6px;padding:0;font-size:1.08rem;font-weight:700;
+      text-decoration:underline;
+    }
+    .section-title.applicant,.section-title.parent{margin-top:2.35em}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:9px 12px}
+    .field{grid-column:span 12;display:flex;align-items:flex-end;gap:6px}
+    .span-2{grid-column:span 2}.span-3{grid-column:span 3}.span-4{grid-column:span 4}
+    .span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}
+    .span-8{grid-column:span 8}.span-9{grid-column:span 9}
+    label{display:block;font-weight:600;margin-bottom:3px}
+    .field label{white-space:nowrap;margin-bottom:0}
+    .field input{flex:1;min-width:0}
+    input[type=text],input[type=number],input[type=tel],input[type=date]{
+      width:100%;font:inherit;color:#111;background:#fff;border:0;
+      border-bottom:1.3px solid #555;padding:4px 5px 2px;outline:none;border-radius:0;
+    }
+    input:focus{border-bottom-color:#1967d2;background:#f7fbff}
+    .choice-row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:8px 0}
+    .choice{display:flex;align-items:center;gap:7px;font-weight:600}
+    input[type=radio]{width:20px;height:20px;accent-color:#111}
+    .sig-wrap{
+      margin-top:5px;border:1px solid #c9d3df;border-radius:10px;
+      padding:10px;background:#fbfcfe;
+    }
+    .sig-label{font-weight:700;margin-bottom:6px}
+    .sig-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+    .sig-tabs button{padding:4px 10px}
+    .sig-tabs button.active{background:#e8f0fe;border-color:#1967d2}
+    .sig-panel{display:none}
+    .sig-panel.active{display:block}
+    canvas.signature{
+      width:100%;height:150px;touch-action:none;border:1px dashed #99a6b7;
+      border-radius:8px;background:#fff;display:block;
+    }
+    .sig-actions{display:flex;gap:8px;margin-top:7px;flex-wrap:wrap}
+    .image-preview{
+      min-height:110px;border:1px dashed #99a6b7;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
+      background:#fff;color:#65758b;text-align:center;padding:8px;margin-top:8px;
+    }
+    .image-preview img{max-width:100%;max-height:150px;object-fit:contain}
+    .bg-remove-tools{
+      display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;
+      margin-top:8px;font-size:.9rem;
+    }
+    .bg-remove-tools label{display:flex;align-items:center;gap:6px;margin:0}
+    .bg-remove-tools input[type=checkbox]{width:18px;height:18px;accent-color:#124da0}
+    .bg-remove-tools input[type=range]{width:115px}
+    .bg-status{color:#526174}
+    .signature-line,.printed-name-row{
+      display:grid;grid-template-columns:52px minmax(165px,210px) 90px;
+      align-items:end;justify-content:center;gap:6px;
+    }
+    .signature-line{margin-top:1px}
+    .signature-prefix,.signature-role{font-weight:600;white-space:nowrap;padding-bottom:4px}
+    .final-signature{
+      min-height:72px;border-bottom:1px solid #444;display:flex;align-items:flex-end;
+      justify-content:center;overflow:hidden;color:var(--blue);font-size:1.5rem;
+      padding:0 8px 3px;
+    }
+    .final-signature img{max-width:100%;max-height:66px;object-fit:contain}
+    .printed-name-row{
+      margin-top:2px;color:#111;
+    }
+    .name-under-signature{
+      grid-column:2;display:flex;align-items:center;justify-content:center;
+      gap:3px;width:100%;min-width:0;
+    }
+    .printed-name-row .paren{font-size:1rem}
+    .printed-name{
+      width:100%!important;min-width:0!important;max-width:none!important;
+      text-align:center;color:#111!important;border:0!important;
+      border-bottom:1px solid #444!important;padding:1px 4px!important;
+      background:transparent!important;white-space:nowrap;
+    }
+    .note{margin-top:2.5em;background:#f2f3f5;padding:7px 10px;font-weight:600}
+    .document-footer{
+      margin-top:16px;padding-top:5px;border-top:1px solid #888;
+      display:flex;justify-content:space-between;gap:12px;font-size:.86rem;color:#444;
+    }
+    .required::after{content:" *";color:#c00}
+    .no-print-info{
+      font-size:.9rem;color:#555;text-align:center;margin:8px auto;
+      max-width:800px;padding:0 12px;
+    }
+    @media(max-width:700px){
+      html{font-size:20px}
+      .page{padding:16px 14px;margin:0 auto;box-shadow:none;width:100%;min-height:auto}
+      .span-2,.span-3,.span-4,.span-5,.span-6,.span-7,.span-8,.span-9{
+        grid-column:span 12;
+      }
+      .header-box{padding:8px}
+      .toolbar{position:static}
+      .signature-line,.printed-name-row{
+        grid-template-columns:42px minmax(145px,185px) 76px;gap:4px;
+      }
+    }
+    @page{size:A4;margin:20mm}
+    @media print{
+      html,body{width:auto;height:auto}
+      body{
+        background:#fff;font-size:22px;line-height:1.06;
+        -webkit-print-color-adjust:exact;print-color-adjust:exact;
+      }
+      .toolbar,.no-print-info,.sig-tabs,.sig-panel,.sig-actions,.sig-label{
+        display:none!important;
+      }
+      .page{
+        width:170mm;height:257mm;min-height:257mm;margin:0;padding:0;
+        box-shadow:none;display:flex;flex-direction:column;overflow:hidden;
+        break-after:avoid-page;page-break-after:avoid;
+      }
+      .header-box{padding:0 4px 4px;margin-bottom:3px;border:0;background:#fff}
+      h1{font-size:1.28rem}
+      .project{font-size:1.12rem}
+      .org,.date,.place{font-size:1rem;margin-top:1px}
+      .section-title{
+        margin:7px 0 2px;padding:0;font-size:1.06rem;border:0;
+        background:#fff!important;text-decoration:none;
+      }
+      .grid{gap:2px 8px}
+      .field{display:flex;align-items:flex-end;gap:4px}
+      .field label{display:block;white-space:nowrap;margin:0;font-weight:400}
+      .field input{flex:1;min-width:0}
+      input[type=text],input[type=number],input[type=tel],input[type=date]{
+        padding:0 2px;background:transparent!important;min-height:18px;
+        text-align:center!important;font-size:1em!important;
+      }
+      input[type=date]::-webkit-date-and-time-value{text-align:center}
+      .choice-row{gap:10px;margin:3px 0}
+      input[type=radio]{width:14px;height:14px}
+      .sig-wrap{border:0;padding:0;margin-top:2px;background:transparent}
+      .signature-line,.printed-name-row{
+        grid-template-columns:45px 180px 76px;gap:5px;
+      }
+      .signature-line{margin-top:0}
+      .signature-prefix,.signature-role{padding-bottom:2px}
+      .final-signature{min-height:34px;padding-bottom:1px}
+      .final-signature img{max-height:32px}
+      .printed-name-row{margin-top:0;min-height:18px}
+      .name-under-signature{font-size:1rem}
+      .name-under-signature .printed-name{
+        max-width:none!important;border-bottom:0!important;color:#111!important
+      }
+      .note{margin-top:44px;padding:4px 7px;background:#fff;border:1px solid #aaa}
+      .document-footer{margin-top:auto;padding-top:4px;font-size:.78rem}
+      .header-box,.sig-wrap,.section-title,.note{break-inside:avoid}
+      .section-title{break-after:avoid}
+      .section-title.applicant,.section-title.parent{margin-top:22px}
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button type="button" id="printBtn">ปริ๊นใบสมัคร</button>
+    <button type="button" id="pdfBtn" class="primary">บันทึกเป็น PDF</button>
+  </div>
+  <div class="no-print-info">
+    กรอกข้อมูลและลงลายเซ็นให้เรียบร้อย จากนั้นเลือกปริ๊นหรือบันทึกเป็น PDF
+  </div>
+
+  <form id="applicationForm">
+    <input type="hidden" id="applicant_signature_data" name="applicant_signature_data">
+    <input type="hidden" id="parent_signature_data" name="parent_signature_data">
+
+    <main class="page">
+      <div class="header-box">
+        <img src="logo.jpg" alt="โลโก้เทศบาล" class="logo">
+        <h1>ใบสมัครเข้าร่วมโครงการ</h1>
+        <div class="project">ค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริ</div>
+        <div class="org">ประจำปีงบประมาณ ๒๕๖๙</div>
+        <div class="date">วันที่ ๒๕ - ๒๖ สิงหาคม ๒๕๖๙</div>
+        <div class="place">ณ สวนสัตว์ขอนแก่น ต.คำม่วง อ.เขาสวนกวาง จ.ขอนแก่น</div>
+      </div>
+
+      <div class="section-title applicant">ส่วนที่ ๑ ข้อมูลผู้สมัคร</div>
+      <div class="grid">
+        <div class="field span-9"><label class="required">ชื่อ - นามสกุล</label><input required type="text" name="applicant_name" autocomplete="name"></div>
+        <div class="field span-3"><label class="required">อายุ (ปี)</label><input required type="number" name="age" min="1" max="99"></div>
+        <div class="field span-7"><label class="required">วันเดือนปีเกิด</label><input required type="date" name="birth_date"></div>
+        <div class="field span-5"><label>โทรศัพท์</label><input type="tel" name="phone" inputmode="tel"></div>
+        <div class="field span-4"><label class="required">บ้านเลขที่</label><input required type="text" name="house_no"></div>
+        <div class="field span-2"><label>หมู่ที่</label><input type="text" name="village_no"></div>
+        <div class="field span-6"><label class="required">ตำบล/แขวง</label><input required type="text" name="subdistrict"></div>
+        <div class="field span-6"><label class="required">อำเภอ/เขต</label><input required type="text" name="district"></div>
+        <div class="field span-6"><label class="required">จังหวัด</label><input required type="text" name="province"></div>
+        <div class="field span-6"><label class="required">โรงเรียน</label><input required type="text" name="school"></div>
+        <div class="field span-6"><label class="required">กำลังศึกษาในระดับชั้น</label><input required type="text" name="class_level"></div>
+      </div>
+
+      <div class="sig-wrap" data-sig="applicant">
+        <div class="sig-label required">ลายเซ็นผู้สมัคร</div>
+        <div class="sig-tabs">
+          <button type="button" class="active" data-mode="draw">เซ็นมือ</button>
+          <button type="button" data-mode="upload">เพิ่มรูป</button>
+        </div>
+        <div class="sig-panel active" data-panel="draw">
+          <canvas class="signature"></canvas>
+          <div class="sig-actions">
+            <button type="button" class="clear-signature">ล้างลายเซ็น</button>
+          </div>
+        </div>
+        <div class="sig-panel" data-panel="upload">
+          <input type="file" class="signature-file" accept="image/*">
+          <div class="bg-remove-tools">
+            <label><input type="checkbox" class="remove-background" checked> ลบพื้นหลังอัตโนมัติ</label>
+            <label>ระดับการลบ <input type="range" class="bg-tolerance" min="20" max="120" value="58"></label>
+            <span class="bg-status"></span>
+          </div>
+          <div class="image-preview">ยังไม่ได้เลือกรูป</div>
+        </div>
+        <div class="signature-line">
+          <span class="signature-prefix">ลงชื่อ</span>
+          <div class="final-signature" aria-label="ตัวอย่างลายเซ็น"></div>
+          <span class="signature-role">ผู้สมัคร</span>
+        </div>
+        <div class="printed-name-row">
+          <div class="name-under-signature">
+            <span class="paren">(</span>
+            <input readonly class="printed-name" type="text" name="applicant_printed_name" aria-label="ชื่อผู้สมัครใต้ลายเซ็น">
+            <span class="paren">)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title parent">ส่วนที่ ๒ คำรับรองของผู้ปกครอง</div>
+      <div class="grid">
+        <div class="field"><label class="required">ข้าพเจ้า</label><input required type="text" name="parent_name"></div>
+        <div class="field"><label class="required">เป็นผู้ปกครองของ</label><input required readonly type="text" name="parent_of"></div>
+      </div>
+      <div class="choice-row" role="group" aria-label="คำอนุญาตของผู้ปกครอง">
+        <label class="choice"><input required type="radio" name="permission" value="อนุญาต"> อนุญาต</label>
+        <label class="choice"><input required type="radio" name="permission" value="ไม่อนุญาต"> ไม่อนุญาต</label>
+        <span>ให้เข้าร่วมโครงการค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริฯ ในครั้งนี้</span>
+      </div>
+
+      <div class="sig-wrap" data-sig="parent">
+        <div class="sig-label required">ลายเซ็นผู้ปกครอง</div>
+        <div class="sig-tabs">
+          <button type="button" class="active" data-mode="draw">เซ็นมือ</button>
+          <button type="button" data-mode="upload">เพิ่มรูป</button>
+        </div>
+        <div class="sig-panel active" data-panel="draw">
+          <canvas class="signature"></canvas>
+          <div class="sig-actions">
+            <button type="button" class="clear-signature">ล้างลายเซ็น</button>
+          </div>
+        </div>
+        <div class="sig-panel" data-panel="upload">
+          <input type="file" class="signature-file" accept="image/*">
+          <div class="bg-remove-tools">
+            <label><input type="checkbox" class="remove-background" checked> ลบพื้นหลังอัตโนมัติ</label>
+            <label>ระดับการลบ <input type="range" class="bg-tolerance" min="20" max="120" value="58"></label>
+            <span class="bg-status"></span>
+          </div>
+          <div class="image-preview">ยังไม่ได้เลือกรูป</div>
+        </div>
+        <div class="signature-line">
+          <span class="signature-prefix">ลงชื่อ</span>
+          <div class="final-signature" aria-label="ตัวอย่างลายเซ็น"></div>
+          <span class="signature-role">ผู้ปกครอง</span>
+        </div>
+        <div class="printed-name-row">
+          <div class="name-under-signature">
+            <span class="paren">(</span>
+            <input readonly class="printed-name" type="text" name="parent_printed_name" aria-label="ชื่อผู้ปกครองใต้ลายเซ็น">
+            <span class="paren">)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">หมายเหตุ: แนบสำเนาบัตรประชาชนของผู้สมัคร จำนวน ๑ ฉบับ</div>
+      <div class="document-footer">
+        <span>กองการศึกษา เทศบาลตำบลพระลับ</span>
+        <span>ใบสมัครเข้าร่วมโครงการสืบสานฯ ประจำปี ๒๕๖๙</span>
+      </div>
+    </main>
+  </form>
+
+  <script>
+  (() => {
+    const form = document.getElementById("applicationForm");
+
+    function fitCanvas(canvas, preserve = true) {
+      const rect = canvas.getBoundingClientRect();
+      if (!rect.width) return;
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const old = preserve && canvas.width ? canvas.toDataURL("image/png") : "";
+      canvas.width = Math.round(rect.width * ratio);
+      canvas.height = Math.round(150 * ratio);
+      const ctx = canvas.getContext("2d");
+      ctx.scale(ratio, ratio);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = 2.4;
+      ctx.strokeStyle = "#0645ad";
+      if (old && old.length > 100) {
+        const image = new Image();
+        image.onload = () => ctx.drawImage(image, 0, 0, rect.width, 150);
+        image.src = old;
+      }
+    }
+
+    document.querySelectorAll(".sig-wrap").forEach(wrap => {
+      const key = wrap.dataset.sig;
+      const tabs = [...wrap.querySelectorAll(".sig-tabs button")];
+      const panels = [...wrap.querySelectorAll(".sig-panel")];
+      const canvas = wrap.querySelector("canvas");
+      const file = wrap.querySelector(".signature-file");
+      const preview = wrap.querySelector(".image-preview");
+      const removeBackgroundToggle = wrap.querySelector(".remove-background");
+      const toleranceControl = wrap.querySelector(".bg-tolerance");
+      const backgroundStatus = wrap.querySelector(".bg-status");
+      const final = wrap.querySelector(".final-signature");
+      const hidden = document.getElementById(key + "_signature_data");
+      let mode = "draw";
+      let drawing = false;
+      let hasDrawing = false;
+      let last = null;
+      let uploadedData = "";
+      let originalUploadedData = "";
+      let processTimer = null;
+
+      fitCanvas(canvas, false);
+
+      function setFinal(data) {
+        final.innerHTML = "";
+        hidden.value = data || "";
+        if (!data) return;
+        const image = new Image();
+        image.src = data;
+        final.appendChild(image);
+      }
+
+      function refresh() {
+        if (mode === "draw") {
+          setFinal(hasDrawing ? canvas.toDataURL("image/png") : "");
+        } else {
+          setFinal(uploadedData);
+        }
+      }
+
+      function removeImageBackground(source, tolerance) {
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => {
+            const maxSide = 1800;
+            const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
+            const width = Math.max(1, Math.round(image.naturalWidth * scale));
+            const height = Math.max(1, Math.round(image.naturalHeight * scale));
+            const workCanvas = document.createElement("canvas");
+            workCanvas.width = width;
+            workCanvas.height = height;
+            const workContext = workCanvas.getContext("2d", {willReadFrequently:true});
+            workContext.drawImage(image, 0, 0, width, height);
+            const pixels = workContext.getImageData(0, 0, width, height);
+            const data = pixels.data;
+            const patch = Math.max(2, Math.round(Math.min(width, height) * .035));
+
+            function averagePatch(startX, startY) {
+              let red = 0, green = 0, blue = 0, count = 0;
+              for (let y = startY; y < Math.min(startY + patch, height); y++) {
+                for (let x = startX; x < Math.min(startX + patch, width); x++) {
+                  const index = (y * width + x) * 4;
+                  if (data[index + 3] < 20) continue;
+                  red += data[index];
+                  green += data[index + 1];
+                  blue += data[index + 2];
+                  count++;
+                }
+              }
+              return count ? [red / count, green / count, blue / count] : [255, 255, 255];
+            }
+
+            const backgrounds = [
+              averagePatch(0, 0),
+              averagePatch(Math.max(0, width - patch), 0),
+              averagePatch(0, Math.max(0, height - patch)),
+              averagePatch(Math.max(0, width - patch), Math.max(0, height - patch))
+            ];
+            const fade = 24;
+
+            for (let index = 0; index < data.length; index += 4) {
+              const red = data[index], green = data[index + 1], blue = data[index + 2];
+              let nearest = Infinity;
+              for (const background of backgrounds) {
+                const distance = Math.sqrt(
+                  (red - background[0]) ** 2 +
+                  (green - background[1]) ** 2 +
+                  (blue - background[2]) ** 2
+                );
+                if (distance < nearest) nearest = distance;
+              }
+              if (nearest <= tolerance) {
+                data[index + 3] = 0;
+              } else if (nearest < tolerance + fade) {
+                data[index + 3] = Math.round(
+                  data[index + 3] * ((nearest - tolerance) / fade)
+                );
+              }
+            }
+
+            workContext.putImageData(pixels, 0, 0);
+            resolve(workCanvas.toDataURL("image/png"));
+          };
+          image.onerror = reject;
+          image.src = source;
+        });
+      }
+
+      async function processUploadedImage() {
+        if (!originalUploadedData) return;
+        if (!removeBackgroundToggle.checked) {
+          uploadedData = originalUploadedData;
+          backgroundStatus.textContent = "ใช้ภาพเดิม";
+        } else {
+          backgroundStatus.textContent = "กำลังลบพื้นหลัง…";
+          try {
+            uploadedData = await removeImageBackground(
+              originalUploadedData,
+              Number(toleranceControl.value)
+            );
+            backgroundStatus.textContent = "ลบพื้นหลังแล้ว";
+          } catch {
+            uploadedData = originalUploadedData;
+            backgroundStatus.textContent = "ลบพื้นหลังไม่สำเร็จ ใช้ภาพเดิม";
+          }
+        }
+        preview.innerHTML = '<img alt="รูปภาพลายเซ็น">';
+        preview.querySelector("img").src = uploadedData;
+        refresh();
+      }
+
+      tabs.forEach(button => button.addEventListener("click", () => {
+        mode = button.dataset.mode;
+        tabs.forEach(item => item.classList.toggle("active", item === button));
+        panels.forEach(panel => panel.classList.toggle("active", panel.dataset.panel === mode));
+        if (mode === "draw") setTimeout(() => fitCanvas(canvas), 20);
+        refresh();
+      }));
+
+      function position(event) {
+        const rect = canvas.getBoundingClientRect();
+        return {x:event.clientX - rect.left, y:event.clientY - rect.top};
+      }
+
+      canvas.addEventListener("pointerdown", event => {
+        drawing = true;
+        hasDrawing = true;
+        last = position(event);
+        canvas.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+
+      canvas.addEventListener("pointermove", event => {
+        if (!drawing) return;
+        const point = position(event);
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+        last = point;
+        event.preventDefault();
+      });
+
+      function endDrawing() {
+        if (!drawing) return;
+        drawing = false;
+        refresh();
+      }
+
+      canvas.addEventListener("pointerup", endDrawing);
+      canvas.addEventListener("pointercancel", endDrawing);
+
+      wrap.querySelector(".clear-signature").addEventListener("click", () => {
+        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+        hasDrawing = false;
+        refresh();
+      });
+
+      file.addEventListener("change", () => {
+        const selected = file.files[0];
+        if (!selected) {
+          uploadedData = "";
+          originalUploadedData = "";
+          preview.textContent = "ยังไม่ได้เลือกรูป";
+          backgroundStatus.textContent = "";
+          refresh();
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          originalUploadedData = reader.result;
+          processUploadedImage();
+        };
+        reader.readAsDataURL(selected);
+      });
+
+      removeBackgroundToggle.addEventListener("change", processUploadedImage);
+      toleranceControl.addEventListener("input", () => {
+        clearTimeout(processTimer);
+        processTimer = setTimeout(processUploadedImage, 180);
+      });
+
+      window.addEventListener("resize", () => {
+        if (mode === "draw") fitCanvas(canvas);
+      });
+    });
+
+    function mirrorName(sourceName, targetName) {
+      const source = form.elements[sourceName];
+      const target = form.elements[targetName];
+      const sync = () => {
+        target.value = source.value.trim();
+        requestAnimationFrame(() => fitPrintedName(target));
+      };
+      source.addEventListener("input", sync);
+      source.addEventListener("change", sync);
+      sync();
+    }
+
+    function mirrorValue(sourceName, targetName) {
+      const source = form.elements[sourceName];
+      const target = form.elements[targetName];
+      const sync = () => { target.value = source.value.trim(); };
+      source.addEventListener("input", sync);
+      source.addEventListener("change", sync);
+      sync();
+    }
+
+    const printedNameMeasureCanvas = document.createElement("canvas");
+    const printedNameMeasureContext = printedNameMeasureCanvas.getContext("2d");
+
+    function fitPrintedName(input, forcedWidth = 0) {
+      const maximum = 18;
+      const minimum = 10;
+      const availableWidth = forcedWidth || Math.max(input.clientWidth - 8, 1);
+      const text = input.value.trim();
+      let size = maximum;
+
+      function measuredWidth() {
+        printedNameMeasureContext.font =
+          `${size}px "TH Sarabun New","TH SarabunPSK","Sarabun",Tahoma,sans-serif`;
+        return printedNameMeasureContext.measureText(text).width;
+      }
+
+      while (text && measuredWidth() > availableWidth && size > minimum) {
+        size -= .5;
+      }
+      input.style.fontSize = size + "px";
+    }
+
+    mirrorName("applicant_name", "applicant_printed_name");
+    mirrorName("parent_name", "parent_printed_name");
+    mirrorValue("applicant_name", "parent_of");
+
+    function fitAllPrintedNames(forcedWidth = 0) {
+      form.querySelectorAll(".printed-name").forEach(
+        input => fitPrintedName(input, forcedWidth)
+      );
+    }
+
+    window.addEventListener("resize", () => fitAllPrintedNames());
+
+    const dateInputs = [...form.querySelectorAll('input[type="date"]')];
+    window.addEventListener("beforeprint", () => {
+      fitAllPrintedNames(148);
+      dateInputs.forEach(input => {
+        if (!input.value) {
+          input.dataset.restoreDate = "true";
+          input.type = "text";
+          input.placeholder = "";
+        }
+      });
+    });
+    window.addEventListener("afterprint", () => {
+      requestAnimationFrame(() => fitAllPrintedNames());
+      dateInputs.forEach(input => {
+        if (input.dataset.restoreDate === "true") {
+          input.type = "date";
+          delete input.dataset.restoreDate;
+        }
+      });
+    });
+
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+    document.getElementById("pdfBtn").addEventListener("click", () => {
+      alert('ในหน้าต่างพิมพ์ ให้เลือกเครื่องพิมพ์ “บันทึกเป็น PDF” หรือ “Save as PDF” แล้วกดบันทึก');
+      window.print();
+    });
+  })();
+  </script>
+</body>
+</html>
