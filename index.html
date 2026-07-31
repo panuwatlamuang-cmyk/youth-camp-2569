@@ -229,41 +229,26 @@
         <div class="field span-6"><label class="required">กำลังศึกษาในระดับชั้น</label><input required type="text" name="class_level"></div>
       </div>
 
-      <div class="sig-wrap" data-sig="applicant">
-        <div class="sig-label required">ลายเซ็นผู้สมัคร</div>
-        <div class="sig-tabs">
-          <button type="button" class="active" data-mode="draw">เซ็นมือ</button>
-          <button type="button" data-mode="upload">เพิ่มรูป</button>
+        <section class="signature-block">
+        <div class="signature-toolbar" aria-label="เลือกวิธีลงลายเซ็น">
+          <button class="mode-btn active" type="button" data-mode="draw">เซ็นมือ</button>
+          <label class="upload-label" for="signatureUpload">แทรกรูป</label>
+          <input id="signatureUpload" class="file-input" type="file" accept="image/*" />
         </div>
-        <div class="sig-panel active" data-panel="draw">
-          <canvas class="signature"></canvas>
-          <div class="sig-actions">
-            <button type="button" class="clear-signature">ล้างลายเซ็น</button>
-          </div>
-        </div>
-        <div class="sig-panel" data-panel="upload">
-          <input type="file" class="signature-file" accept="image/*">
-          <div class="bg-remove-tools">
-            <label><input type="checkbox" class="remove-background" checked> ลบพื้นหลังอัตโนมัติ</label>
-            <label>ระดับการลบ <input type="range" class="bg-tolerance" min="20" max="120" value="58"></label>
-            <span class="bg-status"></span>
-          </div>
-          <div class="image-preview">ยังไม่ได้เลือกรูป</div>
-        </div>
-        <div class="signature-line">
-          <span class="signature-prefix">ลงชื่อ</span>
-          <div class="final-signature" aria-label="ตัวอย่างลายเซ็น"></div>
-          <span class="signature-role">ผู้สมัคร</span>
-        </div>
-        <div class="printed-name-row">
-          <div class="name-under-signature">
-            <span class="paren">(</span>
-            <input readonly class="printed-name" type="text" name="applicant_printed_name" aria-label="ชื่อผู้สมัครใต้ลายเซ็น">
-            <span class="paren">)</span>
-          </div>
-        </div>
-      </div>
 
+        <div class="signature-entry-row">
+          <span class="signature-label">ลงชื่อ</span>
+          <div class="signature-stage">
+            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+            <img id="signatureImage" class="signature-image" alt="รูปลายเซ็น" />
+          </div>
+        </div>
+
+        <div class="signature-caption">
+          <span class="name-line">(<span id="mirrorName">........................................</span>)</span>
+        </div>  
+        <button class="clear-sign" type="button" id="clearSignature">ล้างลายเซ็น</button>
+      </section>
       <div class="section-title parent">ส่วนที่ ๒ คำรับรองของผู้ปกครอง</div>
       <div class="grid">
         <div class="field"><label class="required">ข้าพเจ้า</label><input required type="text" name="parent_name"></div>
@@ -275,17 +260,25 @@
         <span>ให้เข้าร่วมโครงการค่ายเยาวชนเรียนรู้งานสืบสานพระราชดำริฯ ในครั้งนี้</span>
       </div>
 
-      <div class="sig-wrap" data-sig="parent">
-        <div class="sig-label required">ลายเซ็นผู้ปกครอง</div>
-        <div class="sig-tabs">
-          <button type="button" class="active" data-mode="draw">เซ็นมือ</button>
-          <button type="button" data-mode="upload">เพิ่มรูป</button>
+         <section class="signature-block">
+        <div class="signature-toolbar" aria-label="เลือกวิธีลงลายเซ็น">
+          <button class="mode-btn active" type="button" data-mode="draw">เซ็นมือ</button>
+          <label class="upload-label" for="signatureUpload">แทรกรูป</label>
+          <input id="signatureUpload" class="file-input" type="file" accept="image/*" />
         </div>
-        <div class="sig-panel active" data-panel="draw">
-          <canvas class="signature"></canvas>
-          <div class="sig-actions">
-            <button type="button" class="clear-signature">ล้างลายเซ็น</button>
+
+        <div class="signature-entry-row">
+          <span class="signature-label">ลงชื่อ</span>
+          <div class="signature-stage">
+            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+            <img id="signatureImage" class="signature-image" alt="รูปลายเซ็น" />
           </div>
+        </div>
+
+        <div class="signature-caption">
+          <span class="name-line">(<span id="mirrorName">........................................</span>)</span>
+        </div>
+  
         </div>
         <div class="sig-panel" data-panel="upload">
           <input type="file" class="signature-file" accept="image/*">
