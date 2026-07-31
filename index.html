@@ -1077,6 +1077,66 @@ button {
 .upload-label{justify-self:center}
 .draw-panel{position:relative;width:100%;height:100%}
 .drawn-signature-print:not([src]){display:none!important}
+
+/* ลดขนาดตัวอักษรบนหน้าจอ 1.5 เท่า โดยคงส่วนลงชื่อและลายเซ็นไว้เท่าเดิม */
+body { font-size: 22px; }
+.toolbar-title strong { font-size: 18px; }
+.toolbar-title small { font-size: 13px; }
+.toolbar-actions button { font-size: 16px; }
+.document-emblem { width: 86px; height: 86px; }
+.eyebrow { font-size: 17px; }
+.document-header h1 { font-size: 29px; }
+.agency { font-size: 19px; }
+.event-pill { font-size: 16px; }
+.section-heading > span { font-size: 18px; }
+.section-heading h2 { font-size: 23px; }
+.section-heading p { font-size: 14px; }
+.line-field { font-size: 19px; }
+.line-field input { font-size: 20px; }
+.field-suffix { font-size: 19px; }
+.consent-intro { font-size: 18px; }
+.consent-options strong { font-size: 17px; }
+.consent-options small { font-size: 12px; }
+.note-icon { font-size: 14px; }
+.note-box strong { font-size: 16px; }
+.note-box p { font-size: 14px; }
+.document-footer { font-size: 12px; }
+
+@media (max-width: 820px) {
+  .toolbar-actions button { font-size: 14px; }
+  .document-header h1 { font-size: 25px; }
+}
+
+@media (max-width: 570px) {
+  .document-emblem { width: 76px; height: 76px; }
+  .document-header h1 { font-size: 22px; }
+  .agency,
+  .line-field { font-size: 17px; }
+  .line-field input { font-size: 18px; }
+}
+
+@media print {
+  /* เพิ่มเฉพาะตัวอักษรตอนพิมพ์ 1 เท่า โดยไม่เปลี่ยนส่วนลงชื่อและลายเซ็น */
+  body { font-size: 25.5px; }
+  .document-emblem { width: 116px; height: 116px; }
+  .eyebrow { font-size: 22.5px; }
+  .document-header h1 { font-size: 34.5px; }
+  .agency { font-size: 24px; }
+  .event-pill { font-size: 20.25px; }
+  .section-heading > span { font-size: 22.5px; }
+  .section-heading h2 { font-size: 28.5px; }
+  .section-heading p { font-size: 14px; }
+  .line-field,
+  .line-field input,
+  .field-suffix { font-size: 24px; }
+  .consent-intro { font-size: 22.5px; }
+  .consent-options strong { font-size: 22.5px; }
+  .consent-options small { font-size: 16.5px; }
+  .note-icon { font-size: 16.5px; }
+  .note-box strong { font-size: 21px; }
+  .note-box p { font-size: 18px; }
+  .document-footer { font-size: 16.5px; }
+}
 </style>
 </head>
 <body>
