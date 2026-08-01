@@ -537,8 +537,14 @@ button {
 .guardian-copy .guardian-details {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 13px;
+}
+
+/* บังคับให้ช่องข้าพเจ้าและผู้สมัครแยกคนละบรรทัดเสมอ */
+.guardian-copy .guardian-details > .guardian-line {
+  grid-column: 1 / -1 !important;
+  width: 100%;
 }
 
 .consent-intro {
@@ -1135,7 +1141,6 @@ body { font-size: 22px; }
   }
 
   .guardian-copy,
-  .guardian-copy .guardian-details,
   .consent-options {
     grid-template-columns: 1fr 1fr;
   }
@@ -1145,7 +1150,8 @@ body { font-size: 22px; }
   }
 
   .guardian-copy .guardian-details {
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .consent-options {
@@ -1275,8 +1281,8 @@ body { font-size: 22px; }
           </div>
           <div class="guardian-copy">
             <div class="guardian-details">
-              <label class="line-field wide"><span>ข้าพเจ้า(ชื่อ-สกุล)</span><input id="guardianName" name="guardianName" type="text"></label>
-              <label class="line-field wide"><span>เป็นผู้ปกครองของ</span><input id="guardianApplicantName" name="guardianApplicantName" type="text" readonly aria-label="ชื่อผู้สมัครจากหัวข้อที่ 1"></label>
+              <label class="line-field wide guardian-line"><span>ข้าพเจ้า</span><input id="guardianName" name="guardianName" type="text"></label>
+              <label class="line-field wide guardian-line"><span>เป็นผู้ปกครองของ</span><input id="guardianApplicantName" name="guardianApplicantName" type="text" readonly aria-label="ชื่อผู้สมัครจากหัวข้อที่ 1"></label>
             </div>
             <p class="consent-intro">ขอรับรองว่าเป็นผู้ปกครองของผู้สมัครจริง และ</p>
             <div class="consent-options">
