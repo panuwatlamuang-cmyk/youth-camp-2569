@@ -1127,6 +1127,32 @@ body { font-size: 22px; }
   .line-field input { font-size: 18px; }
 }
 
+/* ให้ส่วนที่ 2 บนเบราว์เซอร์จัดวางเหมือนตอนพิมพ์ แม้เปิดบนมือถือ */
+@media screen {
+  .guardian-section {
+    margin-top: 5px;
+    padding-top: 30px;
+  }
+
+  .guardian-copy,
+  .guardian-copy .guardian-details,
+  .consent-options {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .guardian-copy {
+    gap: 4px 15px;
+  }
+
+  .guardian-copy .guardian-details {
+    gap: 15px;
+  }
+
+  .consent-options {
+    gap: 7px;
+  }
+}
+
 @media print {
   /* ขนาดตอนพิมพ์เท่ากับขนาดที่แสดงบนหน้าจอ */
   body { font-size: 22px; }
@@ -1311,7 +1337,30 @@ body { font-size: 22px; }
   (() => {
     document.getElementById("applicantName").addEventListener("input", updateMirrors);
     document.getElementById("guardianName").addEventListener("input", updateMirrors);
-    document.querySelectorAll("[data-print]").forEach((button) => button.addEventListener("click", () => window.print()));
+    document.querySelectorAll("[data-print]").forEach((button) => button.addEventListener("click", printDocument));
+
+    function hideEmptyDatePlaceholder() {
+      document.querySelectorAll('input[type="date"]').forEach((input) => {
+        if (input.value) return;
+        input.dataset.printInputType = "date";
+        input.type = "text";
+      });
+    }
+
+    function restoreDateInputs() {
+      document.querySelectorAll('input[data-print-input-type="date"]').forEach((input) => {
+        input.type = "date";
+        delete input.dataset.printInputType;
+      });
+    }
+
+    function printDocument() {
+      hideEmptyDatePlaceholder();
+      window.print();
+    }
+
+    window.addEventListener("beforeprint", hideEmptyDatePlaceholder);
+    window.addEventListener("afterprint", restoreDateInputs);
 
     function updateMirrors() {
       const applicantName = document.getElementById("applicantName");
